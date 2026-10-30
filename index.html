@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Café Moustache – café de chats</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap">
+<style>
+:root{--bg:#fff1f6;--surface:#fff;--ink:#3b0d24;--muted:#85476a;--line:#f5cfdf;--rose:#ff4f8b;--blush:#ffd6e5;--sel:#7a1b4b;--on-sel:#fff;--dk:#2a0818;--sun:#ffc233;--mint:#3fd0a8;--sky:#4fa8ff;--violet:#a98bff;--orange:#ff8a3d;--q1:#fff0b8;--q2:#ffd6e5;--q3:#d6e6ff;--ac:#ff4f8b;--veil:rgba(255,241,246,.8);color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#220b17;--surface:#341324;--ink:#ffe9f1;--muted:#e3a6bf;--line:#512039;--blush:#3f1629;--sel:#ff8fb8;--on-sel:#3b0d24;--q1:#4a3a10;--q2:#4a1a31;--q3:#14304f;--veil:rgba(34,11,23,.86);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#220b17;--surface:#341324;--ink:#ffe9f1;--muted:#e3a6bf;--line:#512039;--blush:#3f1629;--sel:#ff8fb8;--on-sel:#3b0d24;--q1:#4a3a10;--q2:#4a1a31;--q3:#14304f;--veil:rgba(34,11,23,.86);color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(var(--veil),var(--veil)),url("background.jpg") center/cover fixed no-repeat,var(--bg);color:var(--ink);font:400 1.05rem/1.6 "DM Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#5c1238;z-index:30}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.1;margin:0}
+a{color:inherit}:focus-visible{outline:3px solid #ffb703;outline-offset:3px;border-radius:8px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#5c1238;color:#fff1f6}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:10px}
+.logo{font:800 1.3rem Fraunces,serif;text-decoration:none}
+nav{display:flex;gap:4px;align-items:center}
+nav a{text-decoration:none;padding:8px 12px;border-radius:99px;font-weight:500;font-size:.95rem}nav a:hover{background:rgba(255,255,255,.14)}
+.pill{background:#ff4f8b;color:var(--dk);font-weight:700;border-radius:99px;padding:6px 12px;font-size:.9rem;white-space:nowrap}
+.icon-btn{background:transparent;border:1px solid rgba(255,255,255,.35);color:inherit;border-radius:99px;width:38px;height:38px;cursor:pointer}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--rose);color:var(--dk);font:700 1rem "DM Sans",sans-serif;padding:13px 24px;border-radius:99px;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}.btn.on{background:var(--sel);color:var(--on-sel)}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 18px;border-radius:99px;font:500 .95rem "DM Sans",sans-serif;cursor:pointer}
+.chip[aria-selected="true"]{background:var(--c,var(--sel));color:var(--cc,var(--on-sel));border-color:var(--c,var(--sel))}
+.hero{background:linear-gradient(150deg,rgba(74,18,96,.5),rgba(168,38,95,.35) 60%,rgba(224,72,138,.25)),url("background.jpg") center/cover no-repeat,linear-gradient(150deg,#4a1260,#a8265f 60%,#e0488a);color:#fff1f6;padding:56px 0 80px;border-bottom:8px solid;border-image:linear-gradient(90deg,#ff4f8b,#ffc233,#3fd0a8,#4fa8ff,#a98bff) 1}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.hero h1,.hero p{text-shadow:0 2px 16px rgba(40,0,30,.6)}.hero h1{font-size:clamp(2.4rem,6vw,4.3rem);font-weight:800;letter-spacing:-.02em}
+.hero p{max-width:46ch;color:#ffdbe8;margin:18px 0 28px}.row{display:flex;gap:12px;flex-wrap:wrap}
+.btn.ghost{background:transparent;color:#fff1f6;border:2px solid #ffb3cf}
+.arch{position:relative;justify-self:center;width:min(100%,350px);aspect-ratio:1/1.12;border-radius:999px 999px 28px 28px;overflow:hidden;border:6px solid #ffd6e5;box-shadow:0 26px 60px rgba(40,0,20,.45);cursor:pointer;padding:0;background:#ffd6e5}
+.arch .tag{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:#fff1f6;color:#2a0818;font-weight:700;padding:6px 16px;border-radius:99px;white-space:nowrap}
+.ph{background:var(--blush);overflow:hidden}.ph,.ph svg,.ph img{width:100%;height:100%;display:block}.ph img{object-fit:cover}
+.heart{position:fixed;pointer-events:none;font-size:24px;z-index:40;animation:fly 1s forwards}
+@keyframes fly{to{transform:translateY(-130px) scale(1.5);opacity:0}}
+section{padding:72px 0}
+.head h2{font-size:clamp(1.9rem,4vw,2.7rem)}.head p{margin:8px 0 28px;color:var(--muted);max-width:54ch}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:28px;background:var(--surface);border:3px solid var(--ac);border-radius:32px;padding:24px;box-shadow:0 18px 44px color-mix(in srgb,var(--ac) 30%,transparent);transition:border-color .3s}
+.big{aspect-ratio:1;border-radius:24px;overflow:hidden;border:5px solid var(--ac)}.panel .btn{background:var(--ac)}.panel .btn.on{background:var(--sel)}
+.detail h3{font-size:2.2rem}.sub{color:var(--muted);margin:4px 0 12px}
+.bars .r{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:center;margin:8px 0;font-weight:500}
+.track{height:12px;border-radius:99px;background:var(--blush)}.track i{display:block;height:100%;width:0;border-radius:99px;background:var(--ac);transition:width .6s}
+.thumbs{display:flex;gap:12px;margin-top:18px;overflow-x:auto;padding:4px 2px 8px}
+.th{flex:0 0 96px;border:3px solid transparent;border-radius:20px;background:var(--surface);padding:0;cursor:pointer;overflow:hidden;color:var(--ink);font:600 .85rem "DM Sans",sans-serif}
+.th[aria-pressed="true"]{border-color:var(--ac);box-shadow:0 6px 16px color-mix(in srgb,var(--ac) 40%,transparent)}.th span{color:var(--ink)}.th .ph{aspect-ratio:1;height:auto}.th span{display:block;padding:4px 0}
+.quiz{background:linear-gradient(135deg,var(--q1),var(--q2) 50%,var(--q3))}
+#quizBox{background:var(--surface);border-radius:28px;padding:28px;max-width:680px}
+.step{color:var(--muted);margin:0 0 6px;font-weight:500}#quizBox h3{font-size:1.7rem;margin-bottom:16px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ans{border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:18px;padding:14px;font:500 1rem "DM Sans",sans-serif;cursor:pointer;text-align:left}
+.ans{border-left:10px solid var(--c)}.ans:nth-child(1){--c:#ff4f8b}.ans:nth-child(2){--c:#ffc233}.ans:nth-child(3){--c:#4fa8ff}.ans:nth-child(4){--c:#3fd0a8}.ans:hover{border-color:var(--c);background:var(--blush)}
+.res{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}.res .ph{aspect-ratio:1;height:auto;border-radius:22px;overflow:hidden}
+.res .row{margin-top:12px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;margin-top:12px}
+.item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:2px dotted var(--line)}
+.item .txt{flex:1}.dish{flex:0 0 76px;width:76px;height:76px;padding:0;border:4px solid var(--c);border-radius:20px;overflow:hidden;cursor:zoom-in;background:var(--blush);transition:transform .15s}.dish:hover{transform:scale(1.06) rotate(-2deg)}.dish img{width:100%;height:100%;object-fit:cover;display:block}dialog{border:0;border-radius:28px;background:var(--surface);color:var(--ink);padding:20px;max-width:460px;width:calc(100% - 32px)}dialog::backdrop{background:rgba(40,0,20,.6)}dialog img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;display:block}dialog h3{font-size:1.6rem;margin:12px 0 4px}dialog p{margin:0 0 14px;color:var(--muted)}.item b{font-weight:700}.item small{display:block;color:var(--muted)}.price{font-weight:700;white-space:nowrap;color:var(--rose)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.contact{background:radial-gradient(circle at 90% 10%,rgba(63,208,168,.35),transparent 40%),radial-gradient(circle at 5% 100%,rgba(255,194,51,.3),transparent 40%),linear-gradient(150deg,#2a1260,#7a1b6b 55%,#c2306f);color:#fff1f6}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact p{color:#ffdbe8}.contact .info p{margin:0 0 16px;color:#fff1f6}.contact .info a:not(.btn){color:#ffd166}.head h2::after{content:"";display:block;width:84px;height:6px;border-radius:9px;margin-top:10px;background:linear-gradient(90deg,#ff4f8b,#ffc233,#3fd0a8,#4fa8ff)}
+footer{padding:28px 0;text-align:center;color:var(--muted);font-size:.95rem}
+@media (max-width:760px){.hero .wrap,.panel,.contact .wrap{grid-template-columns:1fr}.answers{grid-template-columns:1fr}.res{grid-template-columns:100px 1fr}nav a.hide{display:none}section{padding:52px 0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="#top">Café Moustache</a>
+<nav aria-label="Navigation principale"><a class="hide" href="#chats">Nos chats</a><a class="hide" href="#quiz">Quiz</a><a class="hide" href="#menu">Menu</a><a href="#contact">Réserver</a><span class="pill" id="favPill" aria-live="polite">♥ 0</span><button class="icon-btn" id="theme" aria-label="Changer de thème">◐</button></nav></div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+ <div><h1>Des câlins, des ronrons et du rose partout.</h1>
+ <p>Six chats adoptables vous attendent entre les tasses et les coussins. Choisissez vos coups de cœur, ou laissez le quiz trouver le chat qui vous ressemble.</p>
+ <div class="row"><a class="btn" href="#quiz">Trouver mon chat</a><a class="btn ghost" href="#chats">Voir les six chats</a></div></div>
+ <button class="arch" id="arch" aria-label="Voir un autre chat"><div class="ph" id="heroPh"></div><span class="tag" id="heroTag"></span></button>
+</div></div>
+
+<section id="chats"><div class="wrap">
+ <div class="head"><h2>Faites connaissance</h2><p>Touchez un portrait pour découvrir son caractère, puis ajoutez-le à vos coups de cœur.</p></div>
+ <div class="panel" id="panel"></div><div class="thumbs" id="thumbs" role="group" aria-label="Choisir un chat"></div>
+</div></section>
+
+<section class="quiz" id="quiz"><div class="wrap">
+ <div class="head"><h2>Quel chat est fait pour vous ?</h2><p>Trois questions rapides, aucune mauvaise réponse.</p></div>
+ <div id="quizBox" aria-live="polite"></div>
+</div></section>
+
+<section id="menu"><div class="wrap">
+ <div class="head"><h2>Au menu</h2><p>Préparé sur place chaque matin. Les boissons sont servies à l’écart des chats.</p></div>
+ <div class="tabs" id="tabs" role="tablist"></div><div class="menu-grid" id="menuList" role="tabpanel"></div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+ <div><h2>Venez nous voir</h2><p>Pas de réservation en ligne : écrivez-nous ou appelez-nous, nous confirmons votre place. Une séance dure 60 minutes, boisson incluse.</p><p id="favLine"></p></div>
+ <div class="info"><p><b>Adresse</b><br>123, rue des Chats</p><p><b>Téléphone</b><br><a href="tel:+15145550123">514 555-0123</a></p><p><b>Heures</b><br>Mar. au ven. : 10 h à 19 h<br>Sam. et dim. : 9 h à 20 h<br>Lundi : fermé</p><a class="btn" id="mail" href="mailto:bonjour@cafemoustache.example">Écrire pour réserver</a></div>
+</div></section>
+</main>
+<footer>© 2026 Café Moustache. Tous nos chats sont stérilisés, vaccinés et adoptables.</footer>
+
+<dialog id="dlg"><div id="dlgBody"></div><form method="dialog"><button class="btn">Fermer</button></form></dialog>
+<script>
+const $=s=>document.querySelector(s);
+/* img: chemin ou data URI d’une vraie photo. Sans photo, un portrait illustré s’affiche. */
+const CATS=[
+{n:"Pistache",ac:"#ff8a3d",m:"Câlin",a:"3 ans",p:"roux tigré",t:"Dort sur les genoux de la première personne qui s’assoit.",v:[5,3,2],f:"#e8a24a",l:"#ffd08a",d:"#b9701f",e1:"#b8f08a",e2:"#4c9a2a",k:"tabby",img:"pistache.jpg"},
+{n:"Nouille",ac:"#ffc233",m:"Joueur",a:"1 an",p:"roux et blanc",t:"Poursuit tout ce qui bouge, surtout les lacets.",v:[3,5,1],f:"#f4a259",l:"#ffd2a1",d:"#c9692a",e1:"#ffe08a",e2:"#d79a10",k:"tabby",w:1,img:"nouille.jpg"},
+{n:"Gaspard",ac:"#4fa8ff",m:"Calme",a:"7 ans",p:"gris bleu",t:"Observe la salle depuis sa fenêtre et juge en silence.",v:[3,1,5],f:"#8e9bc4",l:"#c6cfe9",d:"#5a6590",e1:"#ffe08a",e2:"#d79a10",img:"gaspard.jpg"},
+{n:"Miso",ac:"#3fd0a8",m:"Curieux",a:"2 ans",p:"crème tigré",t:"Ouvre les sacs. Tous les sacs.",v:[3,4,2],f:"#f1dfb8",l:"#fff4dc",d:"#c9a66b",e1:"#9ad8ff",e2:"#2f86c9",k:"tabby",img:"miso.jpg"},
+{n:"Réglisse",ac:"#a98bff",m:"Calme",a:"5 ans",p:"noir",t:"Ronronne dès qu’on le regarde, même de loin.",v:[4,2,5],f:"#3b3556",l:"#6b6490",d:"#17142a",e1:"#ffe66d",e2:"#e0a800",img:"r%C3%A9glisse.jpg"},
+{n:"Câline",ac:"#ff4f8b",m:"Câlin",a:"4 ans",p:"calico",t:"Monte sur les épaules des habitués pour mieux voir.",v:[5,3,2],f:"#f6efe6",l:"#ffffff",d:"#d8c9b8",e1:"#b8f0c8",e2:"#2f9a5a",k:"calico",s:"#e98a3c",s2:"#2a2840",w:1,img:"caline.jpg"}];
+const MENU={Cafés:[["Allongé","Torréfaction locale",3.5,"allongé.jpg"],["Latté miel et lavande","Lait ou boisson d’avoine",5.5,"Latté miel et lavande.jpg"],["Cappuccino rosé","Double espresso, mousse à la rose",5.25,"Cappuccino rosé.jpg"],["Chocolat chaud","Chocolat noir 70 %",5,"Chocolat chaud.jpg"]],Thés:[["Thé vert jasmin","En feuilles",4.25,"Thé vert jasmin.jpg"],["Chai maison","Épices moulues sur place",5.25,"Chai maison.jpg"],["Infusion pétales de rose","Hibiscus et rose",4.5,"Infusion pétales de rose.jpg"]],Gourmandises:[["Croissant au beurre","Cuit chaque matin",3.75,"Croissant au beurre.jpg"],["Macaron framboise","Garni de ganache rose",3.25,"Macaron framboise.jpg"],["Tarte du jour","Demandez à l’équipe",6.5,"Tarte du jour.jpg"],["Sandwich végé","Houmous, légumes grillés",9.5,"Sandwich végé.jpg"]]};
+const Q=[{q:"Votre soirée idéale ?",a:[["Sous une couverture","Câlin"],["Un jeu animé entre amis","Joueur"],["Un livre, en silence","Calme"],["Une sortie surprise","Curieux"]]},
+{q:"Votre boisson parfaite ?",a:[["Un chocolat chaud","Câlin"],["Un latté glacé","Joueur"],["Un thé vert","Calme"],["Le choix du jour, au hasard","Curieux"]]},
+{q:"Un chat qui vous rejoint…",a:[["Monte sur vos genoux","Câlin"],["Apporte un jouet","Joueur"],["S’assoit tout près, tranquille","Calme"],["Fouille votre sac","Curieux"]]}];
+
+/* Portrait illustré (repli quand il n’y a pas de photo) */
+let U=0;
+function portrait(c){const u=++U;let m="";
+ if(c.k==="tabby")m=`<path d="M200 108v46M168 116l8 40M232 116l-8 40M62 212h46M70 238h42M338 212h-46M330 238h-42" stroke="${c.d}" stroke-opacity=".55" stroke-width="9" stroke-linecap="round"/>`;
+ if(c.k==="calico")m=`<path d="M70 190Q64 100 150 98q10 40-18 80-30 24-62 12z" fill="${c.s}"/><path d="M330 180q6 60-70 80 6-60 40-100z" fill="${c.s2}"/>`;
+ if(c.w)m+=`<ellipse cx="200" cy="272" rx="62" ry="46" fill="#fff" opacity=".96"/>`;
+ return `<svg viewBox="0 0 400 400" role="img" aria-label="Portrait illustré de ${c.n}"><defs><radialGradient id="b${u}" cx="50%" cy="30%" r="85%"><stop offset="0" stop-color="#fff0f6"/><stop offset="1" stop-color="#ff9ec4"/></radialGradient><radialGradient id="f${u}" cx="50%" cy="38%" r="68%"><stop offset="0" stop-color="${c.l}"/><stop offset=".65" stop-color="${c.f}"/><stop offset="1" stop-color="${c.d}"/></radialGradient><radialGradient id="i${u}" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="${c.e1}"/><stop offset="1" stop-color="${c.e2}"/></radialGradient><filter id="g${u}"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<rect width="400" height="400" fill="url(#b${u})"/><g filter="url(#g${u})" fill="#fff" opacity=".6"><circle cx="60" cy="70" r="38"/><circle cx="340" cy="60" r="30"/><circle cx="350" cy="150" r="22"/><circle cx="40" cy="170" r="20"/></g>
+<ellipse cx="200" cy="385" rx="160" ry="115" fill="url(#f${u})"/>
+<path d="M92 192 82 66Q140 76 188 122z" fill="url(#f${u})"/><path d="M308 192 318 66Q260 76 212 122z" fill="url(#f${u})"/><path d="M108 168 102 98Q136 106 162 132z" fill="#ffb3c6"/><path d="M292 168 298 98Q264 106 238 132z" fill="#ffb3c6"/>
+<ellipse cx="200" cy="216" rx="136" ry="116" fill="url(#f${u})"/>${m}<ellipse cx="200" cy="150" rx="74" ry="28" fill="#fff" opacity=".13"/>
+<path d="M150 150l-5 14M172 142l-2 16M228 142l2 16M250 150l5 14" stroke="${c.d}" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="148" cy="206" rx="27" ry="29" fill="url(#i${u})"/><ellipse cx="252" cy="206" rx="27" ry="29" fill="url(#i${u})"/><ellipse cx="148" cy="206" rx="8" ry="23" fill="#120a10"/><ellipse cx="252" cy="206" rx="8" ry="23" fill="#120a10"/>
+<path d="M120 196Q148 168 176 196M224 196Q252 168 280 196" stroke="${c.d}" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="158" cy="195" r="6" fill="#fff"/><circle cx="262" cy="195" r="6" fill="#fff"/><circle cx="141" cy="219" r="3" fill="#fff" opacity=".8"/><circle cx="245" cy="219" r="3" fill="#fff" opacity=".8"/>
+<path d="M183 250h34l-17 20z" fill="#ff8fa8" stroke="#d9587c" stroke-width="2"/><path d="M200 270v14M200 284q-14 16-34 8M200 284q14 16 34 8" stroke="#5a2a3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M128 270 38 254M128 282 36 290M272 270l90-16M272 282l92 8" stroke="#fff" stroke-opacity=".85" stroke-width="2.5" stroke-linecap="round"/></svg>`}
+const IMGS={};
+CATS.forEach(c=>{if(!c.img)return;const im=new Image();im.onload=()=>{IMGS[c.n]="ok"};im.onerror=()=>{IMGS[c.n]="err"};im.src=c.img});
+function photo(c){const w=document.createElement("div");w.className="ph";
+ if(!c.img||IMGS[c.n]==="err"){w.innerHTML=portrait(c);return w}
+ const im=new Image();im.alt="Photo de "+c.n;
+ if(IMGS[c.n]==="ok"){im.src=c.img;w.appendChild(im);return w}
+ im.onload=()=>w.replaceChildren(im);im.onerror=()=>{w.innerHTML=portrait(c)};im.src=c.img;return w}
+
+/* Accueil : le portrait change au toucher */
+let h=0;
+function renderHero(){$("#heroPh").replaceChildren(photo(CATS[h]));$("#heroTag").textContent=CATS[h].n;$("#heroTag").style.background=CATS[h].ac}
+$("#arch").addEventListener("click",e=>{h=(h+1)%CATS.length;renderHero();
+ for(let i=0;i<5;i++){const s=document.createElement("span");s.className="heart";s.textContent="♥";s.style.color=["#ff4f8b","#ff8fb8","#ffd6e5"][i%3];
+  s.style.left=(e.clientX||innerWidth/2)+(i-2)*18+"px";s.style.top=(e.clientY||innerHeight/2)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}});
+renderHero();
+
+/* Fiches des chats et coups de cœur */
+let sel=0;const favs=[];
+function bar(l,v){return `<div class="r"><span>${l}</span><div class="track"><i data-w="${v*20}%"></i></div></div>`}
+function renderPanel(){const c=CATS[sel],on=favs.includes(c.n);$("#panel").style.setProperty("--ac",c.ac);
+ $("#panel").innerHTML=`<div class="big"></div><div class="detail"><h3>${c.n}</h3><p class="sub">${c.m}, ${c.a}, ${c.p}</p><p>${c.t}</p><div class="bars">${bar("Câlins",c.v[0])}${bar("Jeu",c.v[1])}${bar("Calme",c.v[2])}</div><button class="btn${on?" on":""}" id="fav" aria-pressed="${on}">${on?"♥ Dans mes coups de cœur":"♡ Ajouter à mes coups de cœur"}</button></div>`;
+ $("#panel .big").appendChild(photo(c));requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll(".track i").forEach(i=>i.style.width=i.dataset.w)))}
+function renderThumbs(){const t=$("#thumbs");t.replaceChildren();CATS.forEach((c,i)=>{const b=document.createElement("button");b.className="th";b.dataset.i=i;b.setAttribute("aria-pressed",i===sel);b.style.setProperty("--ac",c.ac);b.appendChild(photo(c));const s=document.createElement("span");s.textContent=c.n;b.appendChild(s);t.appendChild(b)})}
+function pick(i){sel=i;renderPanel();renderThumbs()}
+function updateFavs(){$("#favPill").textContent="♥ "+favs.length;
+ $("#favLine").textContent=favs.length?"Vos coups de cœur : "+favs.join(", ")+".":"";
+ const body="Bonjour,\nJe voudrais réserver une séance.\nDate : \nHeure : \nNombre de personnes : \n"+(favs.length?"Chats qui m’intéressent : "+favs.join(", ")+"\n":"");
+ $("#mail").href="mailto:bonjour@cafemoustache.example?subject="+encodeURIComponent("Réservation d’une séance")+"&body="+encodeURIComponent(body)}
+$("#thumbs").addEventListener("click",e=>{const b=e.target.closest(".th");if(b)pick(+b.dataset.i)});
+$("#panel").addEventListener("click",e=>{if(!e.target.closest("#fav"))return;const n=CATS[sel].n,i=favs.indexOf(n);i<0?favs.push(n):favs.splice(i,1);renderPanel();updateFavs()});
+pick(0);updateFavs();
+
+/* Quiz */
+let qi=0,score={};
+function renderQuiz(){const b=$("#quizBox");
+ if(qi<Q.length){b.innerHTML=`<p class="step">Question ${qi+1} sur ${Q.length}</p><h3>${Q[qi].q}</h3><div class="answers">${Q[qi].a.map(([t,m])=>`<button class="ans" data-m="${m}">${t}</button>`).join("")}</div>`;return}
+ const best=Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0],i=CATS.findIndex(c=>c.m===best),c=CATS[i];
+ b.innerHTML=`<div class="res"><div id="mini"></div><div><p class="step">Votre match</p><h3>${c.n}</h3><p>${c.t}</p><div class="row"><button class="btn" id="see" data-i="${i}">Voir sa fiche</button><button class="chip" id="redo">Recommencer</button></div></div></div>`;
+ $("#mini").appendChild(photo(c))}
+$("#quizBox").addEventListener("click",e=>{const a=e.target.closest(".ans");
+ if(a){score[a.dataset.m]=(score[a.dataset.m]||0)+1;qi++;renderQuiz();return}
+ if(e.target.closest("#redo")){qi=0;score={};renderQuiz();return}
+ const s=e.target.closest("#see");if(s){pick(+s.dataset.i);$("#chats").scrollIntoView({behavior:"smooth"})}});
+renderQuiz();
+
+/* Menu */
+const TABC={Cafés:"#ffc233",Thés:"#3fd0a8",Gourmandises:"#ff8fb8"};let tab="Cafés";
+function renderMenu(){$("#tabs").innerHTML=Object.keys(MENU).map(k=>`<button class="chip" role="tab" style="--c:${TABC[k]};--cc:#2a0818" aria-selected="${k===tab}" data-k="${k}">${k}</button>`).join("");
+ $("#menuList").innerHTML=MENU[tab].map(([a,b,p,f],i)=>`<div class="item" style="--c:${TABC[tab]}"><button class="dish" data-i="${i}" aria-label="Agrandir la photo : ${a}"><img src="${encodeURIComponent(f)}" alt="${a}"></button><div class="txt"><b>${a}</b><small>${b}</small></div><span class="price">${p.toFixed(2).replace(".",",")} $</span></div>`).join("");
+ document.querySelectorAll(".dish img").forEach(im=>im.addEventListener("error",()=>im.closest(".dish").remove()))}
+$("#menuList").addEventListener("click",e=>{const b=e.target.closest(".dish");if(!b)return;const [a,d,p,f]=MENU[tab][+b.dataset.i];
+ $("#dlgBody").innerHTML=`<img src="${encodeURIComponent(f)}" alt="${a}"><h3>${a}</h3><p>${d}, ${p.toFixed(2).replace(".",",")} $</p>`;$("#dlg").showModal()});
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b){tab=b.dataset.k;renderMenu()}});renderMenu();
+
+$("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=getComputedStyle(r).colorScheme==="dark"?"light":"dark"});
+</script>
+</body>
+</html>
